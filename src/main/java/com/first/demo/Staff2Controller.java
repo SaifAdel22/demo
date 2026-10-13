@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class Staff2Controller {
 
     private List<Staff> staffList = new ArrayList<>();
+    private List<Staff> staffList2 = new ArrayList<>();
+
 
     @GetMapping("/staff2")
     public String showAllStaff2(Model model) {
