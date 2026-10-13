@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Member</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <h1>Staff Member</h1>
+
+    <p><strong>Name:</strong> <span th:text="${staff.staffName}">Name</span></p>
+    <p><strong>Title:</strong> <span th:text="${staff.staffTitle}">Title</span></p>
+    <p><strong>Salary:</strong> <span th:text="${staff.staffSalary}">0.0</span></p>
+
+    <p>
+        <span th:if="${staff.staffSalary >= 5000}" class="good">Good</span>
+        <span th:unless="${staff.staffSalary >= 5000}" class="bad">Bad</span>
+    </p>
+
+    <a href="/staff2">Back to all staff</a> |
+    <a href="/addStaff2">Add another</a>
+
+</body>
+</html>

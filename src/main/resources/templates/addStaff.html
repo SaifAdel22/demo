@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Staff</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <h1>Add Staff Member</h1>
+
+    <!-- 1. عدلنا الـ action لـ /addStaff2 عشان يروح للكنترولر الصح -->
+    <!-- 2. استخدمنا th:action="@{/addStaff2}" عشان الثايمليف يظبط الرابط لوحده -->
+    <form th:object="${addNewStaff}" th:action="@{/addStaff2}" method="post">
+        <input type="hidden" th:field="*{staffId}" />
+        <!-- استخدمنا th:field بدل name العادية عشان الربط يكون دقيق -->
+        <p>Name: <input type="text" th:field="*{staffName}" placeholder="Enter Name" /></p>
+        <p>Title: <input type="text" th:field="*{staffTitle}" placeholder="Enter Title" /></p>
+        <p>Salary: <input type="number" th:field="*{staffSalary}" step="0.01" placeholder="Enter Salary" /></p>
+        
+        <!-- لو مش محتاج الـ ID دلوقتي، ممكن تحذفه مؤقتاً عشان مايلخبطش العرض -->
+        <!-- <input type="hidden" th:field="*{staffId}" /> -->
+
+        <button type="submit">Add</button>
+    </form>
+
+</body>
+</html>

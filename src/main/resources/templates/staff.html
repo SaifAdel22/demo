@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Details</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+    <h1>Staff Member Information</h1>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Salary</th>
+                <th>Salary Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="oneStaff : ${staff}">
+                <td th:text="${oneStaff.staffId}">Id</td>
+                <td th:text="${oneStaff.staffName}">Name</td>
+                <td th:text="${oneStaff.staffTitle}">Title</td>
+                <td th:text="${oneStaff.staffSalary}">0.0</td>
+<td>
+        <!-- بيبعت الـ staffId مع الرابط عشان الكنترولر يعرف إحنا بنعدل مين -->
+        <a role="button" th:href="@{/addStaff2(staffId=${oneStaff.staffId})}">Update</a> | 
+        <a role="button" th:href="@{/deleteStaff2(staffId=${oneStaff.staffId})}" style="color: red;">Delete</a>
+    </td>
+                <td>
+                    <span th:if="${oneStaff.staffSalary >= 5000}" class="good">Good</span>
+                    <span th:unless="${oneStaff.staffSalary >= 5000}" class="bad">Bad</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="greeting" th:each="oneStaff : ${staff}">
+        <div th:switch="${oneStaff.staffName}">
+             <p th:text="'Hi ' + ${oneStaff.staffName}"></p>
+        </div>
+    </div>
+
+    <a href="/staff2">Back to all staff</a> |
+    <a href="/addStaff2">Add another</a>
+
+</body>
+</html>

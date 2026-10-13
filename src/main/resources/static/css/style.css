@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+table {
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    width: 50%;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+.good {
+    color: green;
+    font-weight: bold;
+}
+
+.bad {
+    color: rgb(236, 101, 17);
+    font-weight: bold;
+}
