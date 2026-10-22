@@ -1,10 +1,17 @@
 package com.first.demo;
 import java.util.UUID;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public class Staff {
     private String staffId;
+     @NotBlank(message = "satff Name cant be blank")
     private String staffName;
+     @NotBlank(message = "satff Title cant be blank")
     private String staffTitle;
+    @NotNull(message = "staff Salary cant be null")
+     @Positive(message = "staff Salary must be greater than zero")
     private double staffSalary;
 
      public Staff(String staffName, String staffTitle, double staffSalary , String staffId) {

@@ -5,15 +5,19 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class Staff2Controller {
 
     private List<Staff> staffList = new ArrayList<>();
-    private List<Staff> staffList2 = new ArrayList<>();
+    //private List<Staff> staffList2 = new ArrayList<>();
 
 
     @GetMapping("/staff2")
@@ -27,25 +31,33 @@ public class Staff2Controller {
         Staff myStaff = new Staff();
         int index = getStaffIndex(staffId);
         
-        model.addAttribute("addNewStaff", index == -1 ? myStaff : staffList.get(index));
+        model.addAttribute("addNewStaff", index == Constant.NO_MATCh ? myStaff : staffList.get(index));
         return "addStaff";
     }
 
     public int getStaffIndex(String staffId) {
         for (int i =0 ; i< staffList.size() ; i ++)
             if(staffList.get(i).getStaffId().equals(staffId)) return i;
-            return -1;
+            return Constant.NO_MATCh;
         }
         
        
     
 
-    @PostMapping("/addStaff2")
-    public String saveStaff2(Staff staff) {
+   @PostMapping("/addStaff2")
+    public String saveStaff2(@Valid @ModelAttribute("addNewStaff") Staff staff, BindingResult result ) {
+        System.out.println(result.hasErrors());
+        
+        if (result.hasErrors() == true) {
+            // يجب تمرير الـ model وإضافة الـ staff ليظهر في الصفحة بنفس البيانات ورسائل الخطأ
+           // model.addAttribute("addNewStaff", staff); 
+            return "addStaff";
+        }
+
         int index = getStaffIndex(staff.getStaffId());
         
         int targetIndex;
-        if(index == -1) {
+        if (index == Constant.NO_MATCh) {
             staffList.add(staff);
             targetIndex = staffList.size() - 1;
         } else {
@@ -69,7 +81,7 @@ public class Staff2Controller {
     public String deleteStaff2(@RequestParam String staffId) {
         int index = getStaffIndex(staffId);
         
-        if (index != -1) {
+        if (index != Constant.NO_MATCh) {
             staffList.remove(index);
         }
         

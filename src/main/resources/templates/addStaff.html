@@ -14,12 +14,17 @@
     <form th:object="${addNewStaff}" th:action="@{/addStaff2}" method="post">
         <input type="hidden" th:field="*{staffId}" />
         <!-- استخدمنا th:field بدل name العادية عشان الربط يكون دقيق -->
+         <p th:errors="*{staffName}" style="color: red;"></p>
         <p>Name: <input type="text" th:field="*{staffName}" placeholder="Enter Name" /></p>
+        <p th:errors="*{staffTitle}" style="color: red;"></p>
         <p>Title: <input type="text" th:field="*{staffTitle}" placeholder="Enter Title" /></p>
+         <p th:errors="*{staffSalary}" style="color: red;"></p>
         <p>Salary: <input type="number" th:field="*{staffSalary}" step="0.01" placeholder="Enter Salary" /></p>
         
         <!-- لو مش محتاج الـ ID دلوقتي، ممكن تحذفه مؤقتاً عشان مايلخبطش العرض -->
         <!-- <input type="hidden" th:field="*{staffId}" /> -->
+                 <!-- <input type="hidden" th:field="*{staffId}" /> -->
+
 
         <button type="submit">Add</button>
     </form>
